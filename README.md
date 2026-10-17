@@ -21,14 +21,17 @@ Two devices, each with a problem the other one solves:
 
 Specs come from retailer listings. Internal parts are modeled on typical teardowns of this class of device, so confirm them when you open yours.
 
-## The six steps
+## The seven steps
 
 1. **Identify:** both devices are scanned and matched.
 2. **Diagnose:** each device's weak spot is marked.
 3. **Teardown:** an exploded view of every part. Grab any part, move it, turn it, and inspect it.
 4. **Merge:** drag salvaged parts into the glowing slots of the BoomBot blueprint. Wrong parts get rejected (try the car battery).
-5. **Sculpt:** shape the shell with pull, push and smooth brushes (mirrored), pick a base shape and color.
-6. **Fabricate:** watch it print layer by layer, **export a real STL** of your sculpted shell, and take it for a test drive.
+5. **Source:** the few parts you'd still buy (switch, capacitor, connectors, wire, screws, filament), optional upgrades (ESP32, distance sensor, Raspberry Pi Zero 2 W), a cost breakdown, and a shopping list with links to Amazon, AliExpress, Jumia Nigeria and Alibaba.
+6. **Sculpt:** shape the shell with pull, push and smooth brushes (mirrored), pick a base shape and color. Filament and print time update as you sculpt.
+7. **Fabricate:** watch it print layer by layer, **export a real STL** of your sculpted shell, and take it for a test drive.
+
+Prices in the Source step are estimates from typical 2026 listings. The store links open live search results, so you see current prices there. A web page can't check stores live by itself; that would need a server and store API access.
 
 ## Controls
 
@@ -48,6 +51,7 @@ Any static file server works, e.g. `npx http-server .` then open the printed add
 ## Files
 
 - `js/main.js`: app flow, interaction, XR, printing, STL export
+- `js/sourcing.js`: parts to buy, prices and store links
 - `js/devices.js`: the two devices and all their parts
 - `js/kit.js`: geometry helpers (gears, boards, tires, motors, drivers…)
 - `js/boombot.js`: the merged build and its slots
