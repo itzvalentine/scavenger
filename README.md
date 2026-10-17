@@ -1,42 +1,56 @@
-# ◆ Scavenger
+# Scavenger
 
-Look at old tech. AI finds what's worth saving, designs it a new body, and sends it to your 3D printer.
+Tear down old tech in mixed reality, salvage the good parts, merge them into something new, sculpt a shell, and 3D print it.
 
-This is a **concept prototype** built for the Meta Quest 3S: a WebXR page that runs in the Quest Browser with passthrough, so the Scavenger interface floats around a real object in your room.
+This is a **concept prototype** for the Meta Quest 3S. It's a WebXR page that runs in the Quest Browser with passthrough, so the workshop floats in your real room. It also runs in any desktop or phone browser.
 
-## Demo flow
+**Live:** https://itzvalentine.github.io/scavenger/
 
-1. **Ready**: look at an old device. A ring shows where the surface is.
-2. **Scan**: pinch, and scan brackets and a sweep pass over the object.
-3. **Analysis**: part labels pop up (✓ worth saving, ✕ broken).
-4. **AI design**: pinch, and a hologram of the new build assembles next to it.
-5. **Fabricate**: pinch, and it "prints" layer by layer, then flashes firmware.
-6. **Reborn**: the finished build. Pinch to start again.
+## Test case #001: BoomBot
 
-On a computer or phone, the same demo plays in 3D with a stand-in radio. Use the button or the space bar to step through.
+Two devices, each with a problem the other one solves:
 
-## Open it on the Quest 3S
+| Device | Specs | Problem |
+|---|---|---|
+| CV-C500 gesture stunt car | 2.4 GHz · 4WD · gesture watch · 3.7 V Li-ion (~500 mAh, typical for this class) | Battery dies in ~20–45 min. No speaker. |
+| oraimo SpaceBox OBS-382 | 8 W · 45 mm driver + passive radiator · BT 5.4 · FM · 3.7 V 1800 mAh · 146×72×50 mm | Great sound, but it can't move. |
 
-1. Put the page online with GitHub Pages: repo **Settings → Pages → Deploy from a branch**, pick the branch, folder `/ (root)`, then **Save**.
-2. On the Quest, open the **Browser** and go to the Pages link.
-3. Tap **START AR** and allow access.
-4. Look at your object, then **pinch** (or pull the trigger) to move through the steps.
-5. To record: **Meta button → Camera → Record video**.
+**The insight:** both run on a single 3.7 V Li-ion cell, so their parts can share power.
 
-## Customize it for your object (no code needed)
+**The merge:** BoomBot, a roaming party speaker you steer by tilting your wrist. It uses the car's motors, gearboxes, wheels, receiver, lights and gesture watch, plus the speaker's driver, passive radiator, light ring, main board, USB-C board and 1800 mAh battery (3.6× the car's).
 
-Add these to the end of the link:
+Specs come from retailer listings. Internal parts are modeled on typical teardowns of this class of device, so confirm them when you open yours.
 
-| Setting | Example |
-|---|---|
-| `device` | `?device=Game%20Boy` |
-| `era` | `&era=1989` |
-| `condition` | `&condition=Cracked%20screen` |
-| `parts` (start with `!` for broken) | `&parts=Screen,Buttons,Speaker,!Battery%20Door` |
-| `build` | `&build=Pocket%20Retro%20Console` |
-| `brain` | `&brain=Raspberry%20Pi%20Zero` |
-| `time` | `&time=2h%2040m` |
-| `size` (object size in meters) | `&size=0.15` |
-| `auto` (plays hands-free) | `&auto` |
+## The six steps
 
-`%20` means a space.
+1. **Identify:** both devices are scanned and matched.
+2. **Diagnose:** each device's weak spot is marked.
+3. **Teardown:** an exploded view of every part. Grab any part, move it, turn it, and inspect it.
+4. **Merge:** drag salvaged parts into the glowing slots of the BoomBot blueprint. Wrong parts get rejected (try the car battery).
+5. **Sculpt:** shape the shell with pull, push and smooth brushes (mirrored), pick a base shape and color.
+6. **Fabricate:** watch it print layer by layer, **export a real STL** of your sculpted shell, and take it for a test drive.
+
+## Controls
+
+| | Desktop | Meta Quest |
+|---|---|---|
+| Use a button | Click it | Point and pinch |
+| Grab a part | Drag it | Point, pinch and hold |
+| Turn a part | Right-drag | Turn your hand while holding |
+| Inspect a part | Click | Quick pinch |
+| Sculpt | Drag on the shell (Shift = opposite tool) | Point and pinch-hold on the shell |
+| Change step | ← / → keys, or the panel | Panel buttons |
+
+## Run it locally
+
+Any static file server works, e.g. `npx http-server .` then open the printed address.
+
+## Files
+
+- `js/main.js`: app flow, interaction, XR, printing, STL export
+- `js/devices.js`: the two devices and all their parts
+- `js/kit.js`: geometry helpers (gears, boards, tires, motors, drivers…)
+- `js/boombot.js`: the merged build and its slots
+- `js/sculpt.js`: the sculptable shell
+- `js/ui.js`: the floating panel and tags
+- `js/sound.js`: UI sounds
